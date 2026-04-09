@@ -62,6 +62,9 @@ slprj/
 # Embedded Coder build folders
 *_ert_rtw/
 
+# Matlab autpsave 
+*.asv 
+
 ############################
 # Misc
 ############################
