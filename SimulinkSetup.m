@@ -1,6 +1,6 @@
 %% setup simulink model with its signals and parameters
 mdl = 'Teensy_Model';
-
+load_system(mdl);
 mws = get_param(mdl, 'ModelWorkspace');
 
 ts = 1e-3;
@@ -9,22 +9,22 @@ pwmFreq = 20e3;
 %% Signals
 MDCurrent = Simulink.Signal;
 MDCurrent.Description = "MD_Current";
-MDCurrent.DataType = "single";
+MDCurrent.DataType = "uint16";
 MDCurrent.Complexity = "real";
 
 MotorSpeed_In = Simulink.Signal;
-MotorSpeed_In.Description = "MotorSpeed_In";
+MotorSpeed_In.Description = "actSpeed_Motor";
 MotorSpeed_In.DataType = "single";
 MotorSpeed_In.Complexity = "real";
 
 TorqSpeed_In = Simulink.Signal;
-TorqSpeed_In.Description = "TorqSpeed_In";
+TorqSpeed_In.Description = "actSpeed_Torq";
 TorqSpeed_In.DataType = "single";
 TorqSpeed_In.Complexity = "real";
 
 Torq_Signal = Simulink.Signal;
 Torq_Signal.Description = "Torq_Signal";
-Torq_Signal.DataType = "single";
+Torq_Signal.DataType = "uint16";
 Torq_Signal.Complexity = "real";
 
 % Assign to model workspace
@@ -74,23 +74,25 @@ assignin(mws, Motor_Stop.Description,       Motor_Stop);
 assignin(mws, Footcontrol.Description,      Footcontrol);
 
 %%
- % entries = writeA2LAddresses([MDCurrent.Description, Speed_Out.Description], a2lFilename, pythonFilename)
-entries = writeA2LAddresses( ["CONST_AMPLITUDE","Counter","sine_wave","pulse"], 'arduino_xcponserial_Teensy_2025b.a2l', 'pytestfile.py');
+save_system(mdl); % save simulink model with updated workspace
+varNamesStruct = mws.whos; % read variable names back from model workspace
+entries = writeA2LAddresses({varNamesStruct.name, "bla"}, "Teensy_Model.a2l", "Teensy_ModelAddr.py");
 
 %%
-function entries = writeA2LAddresses(names, a2lFilename, pythonFilename)
+% function entries = writeA2LAddresses(names, a2lFilename, pythonFilename)
 % writeA2LAddresses  Read selected symbols from an A2L and write Python ADDR_* constants.
 %
-% Usage:
-%   writeA2LAddresses(["CONST_AMPLITUDE","Counter"], "file.a2l", "addr_map.py")
+% ex:
+%   writeA2LAddresses(["CONST_AMPLITUDE","Counter"], "file.a2l", "config.py")
 %
 % Input:
-%   names           string/cellstr of short names to search, e.g. "CONST_AMPLITUDE", "Counter"
+%   names           string/cellstr of names to search, e.g. "CONST_AMPLITUDE", "Counter"
 %   a2lFilename     path to .a2l file
 %   pythonFilename  output .py file
 %
 % Output:
 %   entries         struct array with fields: QueryName, A2LName, AddressHex, Type, Kind, PyName
+function entries = writeA2LAddresses(names, a2lFilename, pythonFilename)
 
     if ischar(names)
         names = string({names});
@@ -102,9 +104,8 @@ function entries = writeA2LAddresses(names, a2lFilename, pythonFilename)
 
     txt = fileread(a2lFilename);
 
-    % Find all CHARACTERISTIC and MEASUREMENT blocks
-    charBlocks = regexp(txt, '/begin\s+CHARACTERISTIC\b[\s\S]*?/end\s+CHARACTERISTIC', 'match');
-    measBlocks = regexp(txt, '/begin\s+MEASUREMENT\b[\s\S]*?/end\s+MEASUREMENT', 'match');
+    charBlocks = extractA2LBlocks(txt, 'CHARACTERISTIC');
+    measBlocks = extractA2LBlocks(txt, 'MEASUREMENT');
 
     entries = struct('QueryName', {}, 'A2LName', {}, 'AddressHex', {}, ...
                      'Type', {}, 'Kind', {}, 'PyName', {});
@@ -113,7 +114,6 @@ function entries = writeA2LAddresses(names, a2lFilename, pythonFilename)
         query = strtrim(names(i));
         found = false;
 
-        % Search CHARACTERISTIC
         for k = 1:numel(charBlocks)
             info = parseCharacteristicBlock(charBlocks{k});
             if isMatchName(info.Name, query)
@@ -122,11 +122,8 @@ function entries = writeA2LAddresses(names, a2lFilename, pythonFilename)
                 break;
             end
         end
-        if found
-            continue;
-        end
+        if found, continue; end
 
-        % Search MEASUREMENT
         for k = 1:numel(measBlocks)
             info = parseMeasurementBlock(measBlocks{k});
             if isMatchName(info.Name, query)
@@ -141,7 +138,6 @@ function entries = writeA2LAddresses(names, a2lFilename, pythonFilename)
         end
     end
 
-    % Write Python file
     fid = fopen(pythonFilename, 'w');
     if fid < 0
         error('Cannot open output file: %s', pythonFilename);
@@ -156,31 +152,142 @@ function entries = writeA2LAddresses(names, a2lFilename, pythonFilename)
     end
 
     for i = 1:numel(entries)
-        lhs = pad(entries(i).PyName, maxLen);
-        fprintf(fid, '%s = %s  # %s\n', lhs, entries(i).AddressHex, entries(i).Type);
+        lhs = char(pad(entries(i).PyName, maxLen));
+        fprintf(fid, '%s = %s  # %s (%s)\n', lhs, entries(i).AddressHex, entries(i).Type, entries(i).Kind);
     end
 
     fclose(fid);
 end
 
-function out = parseCharacteristicBlock(block)
-    out.Name = extractFirst(block, '/begin\s+CHARACTERISTIC\s+([^\s\r\n]+)');
-    out.AddressHex = upper(extractFirst(block, '\/\*\s*ECU Address\s*\*\/\s*(0x[0-9A-Fa-f]+)'));
+function blocks = extractA2LBlocks(txt, blockName)
+    lines = splitlines(string(txt));
+    blocks = {};
+    inside = false;
+    buf = strings(0,1);
 
-    recLayout = extractFirst(block, '\/\*\s*Record Layout\s*\*\/\s*([^\s\r\n]+)');
-    out.Type = erase(recLayout, 'Record_');
-    if strlength(out.Type) == 0
-        out.Type = "UNKNOWN";
+    beginPat = "/begin " + blockName;
+    endPat   = "/end " + blockName;
+
+    for i = 1:numel(lines)
+        line = strtrim(lines(i));
+
+        if ~inside
+            if startsWith(line, beginPat)
+                inside = true;
+                buf = lines(i);
+            end
+        else
+            buf(end+1,1) = lines(i); %#ok<AGROW>
+            if startsWith(line, endPat)
+                blocks{end+1} = strjoin(buf, newline); %#ok<AGROW>
+                inside = false;
+                buf = strings(0,1);
+            end
+        end
+    end
+end
+
+function out = parseCharacteristicBlock(block)
+    lines = splitlines(string(block));
+    lines = strtrim(lines);
+
+    out.Name = "";
+    out.AddressHex = "";
+    out.Type = "UNKNOWN";
+
+    % Name: first useful line after /begin CHARACTERISTIC
+    for i = 2:numel(lines)
+        line = lines(i);
+        if strlength(line) == 0
+            continue
+        end
+        if startsWith(line, '/*')
+            tokens = regexp(line, '\*/\s*(\S+)', 'tokens', 'once');
+            if ~isempty(tokens)
+                out.Name = string(tokens{1});
+                break
+            end
+        else
+            tokens = regexp(line, '^(\S+)', 'tokens', 'once');
+            if ~isempty(tokens)
+                out.Name = string(tokens{1});
+                break
+            end
+        end
+    end
+
+    % ECU Address
+    for i = 1:numel(lines)
+        line = lines(i);
+        tok = regexp(line, '0x[0-9A-Fa-f]+', 'match', 'once');
+        if contains(line, 'ECU Address') && ~isempty(tok)
+            out.AddressHex = upper(string(tok));
+            break
+        end
+    end
+
+    % Record layout -> type
+    for i = 1:numel(lines)
+        line = lines(i);
+        if contains(line, 'Record Layout')
+            tok = regexp(line, '\*/\s*(\S+)', 'tokens', 'once');
+            if ~isempty(tok)
+                out.Type = erase(string(tok{1}), "Record_");
+            end
+            break
+        end
     end
 end
 
 function out = parseMeasurementBlock(block)
-    out.Name = extractFirst(block, '/begin\s+MEASUREMENT\s+([^\s\r\n]+)');
-    out.Type = extractFirst(block, '\/\*\s*Data type\s*\*\/\s*([^\s\r\n]+)');
-    out.AddressHex = upper(extractFirst(block, 'ECU_ADDRESS\s+(0x[0-9A-Fa-f]+)'));
+    lines = splitlines(string(block));
+    lines = strtrim(lines);
 
-    if strlength(out.Type) == 0
-        out.Type = "UNKNOWN";
+    out.Name = "";
+    out.AddressHex = "";
+    out.Type = "UNKNOWN";
+
+    % Name: first useful line after /begin MEASUREMENT
+    for i = 2:numel(lines)
+        line = lines(i);
+        if strlength(line) == 0
+            continue
+        end
+        if startsWith(line, '/*')
+            tokens = regexp(line, '\*/\s*(\S+)', 'tokens', 'once');
+            if ~isempty(tokens)
+                out.Name = string(tokens{1});
+                break
+            end
+        else
+            tokens = regexp(line, '^(\S+)', 'tokens', 'once');
+            if ~isempty(tokens)
+                out.Name = string(tokens{1});
+                break
+            end
+        end
+    end
+
+    % Data type
+    for i = 1:numel(lines)
+        line = lines(i);
+        if contains(line, 'Data type')
+            tok = regexp(line, '\*/\s*(\S+)', 'tokens', 'once');
+            if ~isempty(tok)
+                out.Type = string(tok{1});
+            end
+            break
+        end
+    end
+
+    % ECU_ADDRESS line
+    for i = 1:numel(lines)
+        line = lines(i);
+        tok = regexp(line, 'ECU_ADDRESS\s+(0x[0-9A-Fa-f]+)', 'tokens', 'once');
+        if ~isempty(tok)
+            out.AddressHex = upper(string(tok{1}));
+            break
+        end
     end
 end
 
@@ -188,24 +295,10 @@ function tf = isMatchName(fullA2LName, query)
     fullA2LName = string(strtrim(fullA2LName));
     query = string(strtrim(query));
 
-    if fullA2LName == query
-        tf = true;
-        return;
-    end
-
     parts = split(fullA2LName, '.');
     lastPart = parts(end);
 
-    tf = strcmpi(lastPart, query) || endsWith(fullA2LName, "." + query, 'IgnoreCase', true);
-end
-
-function s = extractFirst(txt, pattern)
-    tok = regexp(txt, pattern, 'tokens', 'once');
-    if isempty(tok)
-        s = "";
-    else
-        s = string(strtrim(tok{1}));
-    end
+    tf = strcmpi(fullA2LName, query) || strcmpi(lastPart, query);
 end
 
 function entry = makeEntry(query, a2lName, addrHex, typ, kind)
