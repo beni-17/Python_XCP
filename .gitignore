@@ -65,6 +65,9 @@ slprj/
 # Matlab autpsave 
 *.asv 
 
+# Teensy folder (only locally used if no SM_Library)
+Teensy/
+
 ############################
 # Misc
 ############################
