@@ -12,28 +12,50 @@ MDCurrent.Description = "MD_Current";
 MDCurrent.DataType = "uint16";
 MDCurrent.Complexity = "real";
 
-MotorSpeed_In = Simulink.Signal;
-MotorSpeed_In.Description = "actSpeed_Motor";
-MotorSpeed_In.DataType = "single";
-MotorSpeed_In.Complexity = "real";
+actSpeed_Motor = Simulink.Signal;
+actSpeed_Motor.Description = "actSpeed_Motor";
+actSpeed_Motor.DataType = "single";
+actSpeed_Motor.Complexity = "real";
 
-TorqSpeed_In = Simulink.Signal;
-TorqSpeed_In.Description = "actSpeed_Torq";
-TorqSpeed_In.DataType = "single";
-TorqSpeed_In.Complexity = "real";
+actSpeed_Torq = Simulink.Signal;
+actSpeed_Torq.Description = "actSpeed_Torq";
+actSpeed_Torq.DataType = "single";
+actSpeed_Torq.Complexity = "real";
 
 Torq_Signal = Simulink.Signal;
 Torq_Signal.Description = "Torq_Signal";
 Torq_Signal.DataType = "uint16";
 Torq_Signal.Complexity = "real";
 
+actTemp_48 = Simulink.Signal;
+actTemp_48.Description = "actTemp_48";
+actTemp_48.DataType = "single";
+actTemp_48.Complexity = "real";
+
+actTemp_49 = Simulink.Signal;
+actTemp_49.Description = "actTemp_49";
+actTemp_49.DataType = "single";
+actTemp_49.Complexity = "real";
+
 % Assign to model workspace
 assignin(mws, MDCurrent.Description,        MDCurrent);
-assignin(mws, MotorSpeed_In.Description,    MotorSpeed_In);
-assignin(mws, TorqSpeed_In.Description,     TorqSpeed_In);
+assignin(mws, actSpeed_Motor.Description,   actSpeed_Motor);
+assignin(mws, actSpeed_Torq.Description,    actSpeed_Torq);
 assignin(mws, Torq_Signal.Description,      Torq_Signal);  
+assignin(mws, actTemp_48.Description,       actTemp_48);
+assignin(mws, actTemp_49.Description,       actTemp_49);
 
 %% Parameters
+% I2C_Adress = Simulink.Parameter;
+% I2C_Adress.Description = "I2C_Adress";
+% I2C_Adress.DataType = "uint8";
+% I2C_Adress.Value = 0x48;
+% 
+% I2C_Register = Simulink.Parameter;
+% I2C_Register.Description = "I2C_Register";
+% I2C_Register.DataType = "uint8";
+% I2C_Register.Value = 0x00; % 0x00 = temperaure register
+
 Status_LED = Simulink.Parameter;
 Status_LED.Description = "Status_LED";
 Status_LED.DataType = "boolean";
@@ -66,6 +88,8 @@ Footcontrol.DataType = "uint8";
 Footcontrol.Value = 0;
 
 % Assign to model workspace
+% assignin(mws, I2C_Adress.Description,       I2C_Adress);
+% assignin(mws, I2C_Register.Description,     I2C_Register);
 assignin(mws, Status_LED.Description,       Status_LED);
 assignin(mws, Torq_Out.Description,         Torq_Out);
 assignin(mws, Speed_Out.Description,        Speed_Out);
