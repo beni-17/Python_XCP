@@ -6,9 +6,9 @@
  *
  * Code generation for model "Teensy_Model".
  *
- * Model version              : 51
+ * Model version              : 65
  * Simulink Coder version : 25.2 (R2025b) 28-Jul-2025
- * C source code generated on : Tue Apr 14 09:00:30 2026
+ * C source code generated on : Fri Apr 17 15:52:19 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -800,7 +800,7 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
     /* Name                   */      Teensy_Model_P.Footcontrol
     /* Long Identifier        */      "Footcontrol"
     /* Type                   */      VALUE
-    /* ECU Address            */      0x20000C03
+    /* ECU Address            */      0x20000C06
     /* Record Layout          */      Record_UBYTE
     /* Maximum Difference     */      0
     /* Conversion Method      */      Teensy_Model_CM_uint8
@@ -809,10 +809,46 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
   /end CHARACTERISTIC 
 
   /begin CHARACTERISTIC 
+    /* Name                   */      Teensy_Model_P.GPIO_0
+    /* Long Identifier        */      "GPIO_0"
+    /* Type                   */      VALUE
+    /* ECU Address            */      0x20000C00
+    /* Record Layout          */      Record_BOOLEAN
+    /* Maximum Difference     */      0
+    /* Conversion Method      */      Teensy_Model_CM_boolean
+    /* Lower Limit            */      0
+    /* Upper Limit            */      1
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC 
+    /* Name                   */      Teensy_Model_P.GPIO_1
+    /* Long Identifier        */      "GPIO_1"
+    /* Type                   */      VALUE
+    /* ECU Address            */      0x20000C01
+    /* Record Layout          */      Record_BOOLEAN
+    /* Maximum Difference     */      0
+    /* Conversion Method      */      Teensy_Model_CM_boolean
+    /* Lower Limit            */      0
+    /* Upper Limit            */      1
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC 
+    /* Name                   */      Teensy_Model_P.GPIO_2
+    /* Long Identifier        */      "GPIO_2"
+    /* Type                   */      VALUE
+    /* ECU Address            */      0x20000C02
+    /* Record Layout          */      Record_BOOLEAN
+    /* Maximum Difference     */      0
+    /* Conversion Method      */      Teensy_Model_CM_boolean
+    /* Lower Limit            */      0
+    /* Upper Limit            */      1
+  /end CHARACTERISTIC 
+
+  /begin CHARACTERISTIC 
     /* Name                   */      Teensy_Model_P.Gain1_Gain
     /* Long Identifier        */      ""
     /* Type                   */      VALUE
-    /* ECU Address            */      0x20000C10
+    /* ECU Address            */      0x20000C14
     /* Record Layout          */      Record_UBYTE
     /* Maximum Difference     */      0
     /* Conversion Method      */      Teensy_Model_CM_ufix8_En6
@@ -824,7 +860,7 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
     /* Name                   */      Teensy_Model_P.Gain2_Gain
     /* Long Identifier        */      ""
     /* Type                   */      VALUE
-    /* ECU Address            */      0x20000C11
+    /* ECU Address            */      0x20000C15
     /* Record Layout          */      Record_UBYTE
     /* Maximum Difference     */      0
     /* Conversion Method      */      Teensy_Model_CM_ufix8_En6
@@ -836,7 +872,7 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
     /* Name                   */      Teensy_Model_P.Gain3_Gain
     /* Long Identifier        */      ""
     /* Type                   */      VALUE
-    /* ECU Address            */      0x20000C08
+    /* ECU Address            */      0x20000C0C
     /* Record Layout          */      Record_FLOAT32_IEEE
     /* Maximum Difference     */      0
     /* Conversion Method      */      Teensy_Model_CM_single
@@ -848,7 +884,7 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
     /* Name                   */      Teensy_Model_P.Gain4_Gain
     /* Long Identifier        */      ""
     /* Type                   */      VALUE
-    /* ECU Address            */      0x20000C0C
+    /* ECU Address            */      0x20000C10
     /* Record Layout          */      Record_FLOAT32_IEEE
     /* Maximum Difference     */      0
     /* Conversion Method      */      Teensy_Model_CM_single
@@ -860,7 +896,7 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
     /* Name                   */      Teensy_Model_P.Gain_Gain
     /* Long Identifier        */      ""
     /* Type                   */      VALUE
-    /* ECU Address            */      0x20000C12
+    /* ECU Address            */      0x20000C16
     /* Record Layout          */      Record_UBYTE
     /* Maximum Difference     */      0
     /* Conversion Method      */      Teensy_Model_CM_ufix8_En6
@@ -872,7 +908,7 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
     /* Name                   */      Teensy_Model_P.Motor_Enable
     /* Long Identifier        */      "Motor_Enable"
     /* Type                   */      VALUE
-    /* ECU Address            */      0x20000C00
+    /* ECU Address            */      0x20000C03
     /* Record Layout          */      Record_BOOLEAN
     /* Maximum Difference     */      0
     /* Conversion Method      */      Teensy_Model_CM_boolean
@@ -884,7 +920,7 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
     /* Name                   */      Teensy_Model_P.Motor_Stop
     /* Long Identifier        */      "Motor_Stop"
     /* Type                   */      VALUE
-    /* ECU Address            */      0x20000C01
+    /* ECU Address            */      0x20000C04
     /* Record Layout          */      Record_BOOLEAN
     /* Maximum Difference     */      0
     /* Conversion Method      */      Teensy_Model_CM_boolean
@@ -896,7 +932,7 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
     /* Name                   */      Teensy_Model_P.Speed_Out
     /* Long Identifier        */      "Speed_Out"
     /* Type                   */      VALUE
-    /* ECU Address            */      0x20000C04
+    /* ECU Address            */      0x20000C07
     /* Record Layout          */      Record_UBYTE
     /* Maximum Difference     */      0
     /* Conversion Method      */      Teensy_Model_CM_uint8
@@ -908,7 +944,7 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
     /* Name                   */      Teensy_Model_P.Status_LED
     /* Long Identifier        */      "Status_LED"
     /* Type                   */      VALUE
-    /* ECU Address            */      0x20000C02
+    /* ECU Address            */      0x20000C05
     /* Record Layout          */      Record_BOOLEAN
     /* Maximum Difference     */      0
     /* Conversion Method      */      Teensy_Model_CM_boolean
@@ -920,7 +956,7 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
     /* Name                   */      Teensy_Model_P.Torq_Out
     /* Long Identifier        */      "Torq_Out"
     /* Type                   */      VALUE
-    /* ECU Address            */      0x20000C05
+    /* ECU Address            */      0x20000C08
     /* Record Layout          */      Record_UBYTE
     /* Maximum Difference     */      0
     /* Conversion Method      */      Teensy_Model_CM_uint8
@@ -929,15 +965,15 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
   /end CHARACTERISTIC 
 
   /begin MEASUREMENT 
-    /* Name                   */      Teensy_Model_B.MATLABSystem.rpm_out_sens
-    /* Long identifier        */      ""
-    /* Data type              */      FLOAT64_IEEE
-    /* Conversion method      */      Teensy_Model_CM_double
+    /* Name                   */      Teensy_Model_B.GPIO_3
+    /* Long identifier        */      "GPIO_3"
+    /* Data type              */      UWORD
+    /* Conversion method      */      Teensy_Model_CM_uint16
     /* Resolution (Not used)  */      0      
     /* Accuracy (Not used)    */      0      
-    /* Lower limit            */      -1.7E+308
-    /* Upper limit            */      1.7E+308
-    ECU_ADDRESS                       0x200014A0
+    /* Lower limit            */      0
+    /* Upper limit            */      65535
+    ECU_ADDRESS                       0x20001B24
     /begin IF_DATA XCP
       /begin DAQ_EVENT VARIABLE
           /begin DEFAULT_EVENT_LIST
@@ -948,15 +984,34 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
   /end MEASUREMENT 
 
   /begin MEASUREMENT 
-    /* Name                   */      Teensy_Model_B.MATLABSystem1.rpm_out_sens
-    /* Long identifier        */      ""
-    /* Data type              */      FLOAT64_IEEE
-    /* Conversion method      */      Teensy_Model_CM_double
+    /* Name                   */      Teensy_Model_B.GPIO_4
+    /* Long identifier        */      "GPIO_4"
+    /* Data type              */      UWORD
+    /* Conversion method      */      Teensy_Model_CM_uint16
     /* Resolution (Not used)  */      0      
     /* Accuracy (Not used)    */      0      
-    /* Lower limit            */      -1.7E+308
-    /* Upper limit            */      1.7E+308
-    ECU_ADDRESS                       0x20001498
+    /* Lower limit            */      0
+    /* Upper limit            */      65535
+    ECU_ADDRESS                       0x20001B26
+    /begin IF_DATA XCP
+      /begin DAQ_EVENT VARIABLE
+          /begin DEFAULT_EVENT_LIST
+            EVENT  0x0000
+          /end DEFAULT_EVENT_LIST
+      /end DAQ_EVENT
+    /end IF_DATA
+  /end MEASUREMENT 
+
+  /begin MEASUREMENT 
+    /* Name                   */      Teensy_Model_B.GPIO_5
+    /* Long identifier        */      "GPIO_5"
+    /* Data type              */      UWORD
+    /* Conversion method      */      Teensy_Model_CM_uint16
+    /* Resolution (Not used)  */      0      
+    /* Accuracy (Not used)    */      0      
+    /* Lower limit            */      0
+    /* Upper limit            */      65535
+    ECU_ADDRESS                       0x20001B28
     /begin IF_DATA XCP
       /begin DAQ_EVENT VARIABLE
           /begin DEFAULT_EVENT_LIST
@@ -975,7 +1030,7 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
     /* Accuracy (Not used)    */      0      
     /* Lower limit            */      0
     /* Upper limit            */      65535
-    ECU_ADDRESS                       0x20001494
+    ECU_ADDRESS                       0x20001B2A
     /begin IF_DATA XCP
       /begin DAQ_EVENT VARIABLE
           /begin DEFAULT_EVENT_LIST
@@ -994,7 +1049,7 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
     /* Accuracy (Not used)    */      0      
     /* Lower limit            */      0
     /* Upper limit            */      65535
-    ECU_ADDRESS                       0x20001496
+    ECU_ADDRESS                       0x20001B2C
     /begin IF_DATA XCP
       /begin DAQ_EVENT VARIABLE
           /begin DEFAULT_EVENT_LIST
@@ -1013,7 +1068,7 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
     /* Accuracy (Not used)    */      0      
     /* Lower limit            */      -3.4E+38
     /* Upper limit            */      3.4E+38
-    ECU_ADDRESS                       0x20001480
+    ECU_ADDRESS                       0x20001B10
     /begin IF_DATA XCP
       /begin DAQ_EVENT VARIABLE
           /begin DEFAULT_EVENT_LIST
@@ -1032,7 +1087,7 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
     /* Accuracy (Not used)    */      0      
     /* Lower limit            */      -3.4E+38
     /* Upper limit            */      3.4E+38
-    ECU_ADDRESS                       0x20001484
+    ECU_ADDRESS                       0x20001B14
     /begin IF_DATA XCP
       /begin DAQ_EVENT VARIABLE
           /begin DEFAULT_EVENT_LIST
@@ -1051,7 +1106,7 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
     /* Accuracy (Not used)    */      0      
     /* Lower limit            */      -3.4E+38
     /* Upper limit            */      3.4E+38
-    ECU_ADDRESS                       0x20001488
+    ECU_ADDRESS                       0x20001B18
     /begin IF_DATA XCP
       /begin DAQ_EVENT VARIABLE
           /begin DEFAULT_EVENT_LIST
@@ -1070,7 +1125,7 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
     /* Accuracy (Not used)    */      0      
     /* Lower limit            */      -3.4E+38
     /* Upper limit            */      3.4E+38
-    ECU_ADDRESS                       0x2000148C
+    ECU_ADDRESS                       0x20001B1C
     /begin IF_DATA XCP
       /begin DAQ_EVENT VARIABLE
           /begin DEFAULT_EVENT_LIST
@@ -1081,7 +1136,7 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
   /end MEASUREMENT 
 
   /begin MEASUREMENT 
-    /* Name                   */      Teensy_Model_B.tempSig_raw
+    /* Name                   */      Teensy_Model_B.tempSig_raw_48
     /* Long identifier        */      ""
     /* Data type              */      UWORD
     /* Conversion method      */      Teensy_Model_CM_uint16
@@ -1089,7 +1144,7 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
     /* Accuracy (Not used)    */      0      
     /* Lower limit            */      0
     /* Upper limit            */      65535
-    ECU_ADDRESS                       0x20001492
+    ECU_ADDRESS                       0x20001B22
     /begin IF_DATA XCP
       /begin DAQ_EVENT VARIABLE
           /begin DEFAULT_EVENT_LIST
@@ -1108,357 +1163,11 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
     /* Accuracy (Not used)    */      0      
     /* Lower limit            */      0
     /* Upper limit            */      65535
-    ECU_ADDRESS                       0x20001490
+    ECU_ADDRESS                       0x20001B20
     /begin IF_DATA XCP
       /begin DAQ_EVENT VARIABLE
           /begin DEFAULT_EVENT_LIST
             EVENT  0x0001
-          /end DEFAULT_EVENT_LIST
-      /end DAQ_EVENT
-    /end IF_DATA
-  /end MEASUREMENT 
-
-  /begin MEASUREMENT 
-    /* Name                   */      Teensy_Model_DW.MATLABSystem.ctr
-    /* Long identifier        */      ""
-    /* Data type              */      SLONG
-    /* Conversion method      */      Teensy_Model_CM_int32
-    /* Resolution (Not used)  */      0      
-    /* Accuracy (Not used)    */      0      
-    /* Lower limit            */      -2147483648
-    /* Upper limit            */      2147483647
-    ECU_ADDRESS                       0x20001708
-    /begin IF_DATA XCP
-      /begin DAQ_EVENT VARIABLE
-          /begin DEFAULT_EVENT_LIST
-            EVENT  0x0000
-          /end DEFAULT_EVENT_LIST
-      /end DAQ_EVENT
-    /end IF_DATA
-  /end MEASUREMENT 
-
-  /begin MEASUREMENT 
-    /* Name                   */      Teensy_Model_DW.MATLABSystem.ctrOld
-    /* Long identifier        */      ""
-    /* Data type              */      SLONG
-    /* Conversion method      */      Teensy_Model_CM_int32
-    /* Resolution (Not used)  */      0      
-    /* Accuracy (Not used)    */      0      
-    /* Lower limit            */      -2147483648
-    /* Upper limit            */      2147483647
-    ECU_ADDRESS                       0x2000170C
-    /begin IF_DATA XCP
-      /begin DAQ_EVENT VARIABLE
-          /begin DEFAULT_EVENT_LIST
-            EVENT  0x0000
-          /end DEFAULT_EVENT_LIST
-      /end DAQ_EVENT
-    /end IF_DATA
-  /end MEASUREMENT 
-
-  /begin MEASUREMENT 
-    /* Name                   */      Teensy_Model_DW.MATLABSystem.ctrWrapped
-    /* Long identifier        */      ""
-    /* Data type              */      SLONG
-    /* Conversion method      */      Teensy_Model_CM_int32
-    /* Resolution (Not used)  */      0      
-    /* Accuracy (Not used)    */      0      
-    /* Lower limit            */      -2147483648
-    /* Upper limit            */      2147483647
-    ECU_ADDRESS                       0x20001710
-    /begin IF_DATA XCP
-      /begin DAQ_EVENT VARIABLE
-          /begin DEFAULT_EVENT_LIST
-            EVENT  0x0000
-          /end DEFAULT_EVENT_LIST
-      /end DAQ_EVENT
-    /end IF_DATA
-  /end MEASUREMENT 
-
-  /begin MEASUREMENT 
-    /* Name                   */      Teensy_Model_DW.MATLABSystem.objisempty
-    /* Long identifier        */      ""
-    /* Data type              */      UBYTE
-    /* Conversion method      */      Teensy_Model_CM_boolean
-    /* Resolution (Not used)  */      0      
-    /* Accuracy (Not used)    */      0      
-    /* Lower limit            */      0
-    /* Upper limit            */      1
-    ECU_ADDRESS                       0x20001714
-    /begin IF_DATA XCP
-      /begin DAQ_EVENT VARIABLE
-          /begin DEFAULT_EVENT_LIST
-            EVENT  0x0000
-          /end DEFAULT_EVENT_LIST
-      /end DAQ_EVENT
-    /end IF_DATA
-  /end MEASUREMENT 
-
-  /begin MEASUREMENT 
-    /* Name                   */      Teensy_Model_DW.MATLABSystem.resetOld
-    /* Long identifier        */      ""
-    /* Data type              */      FLOAT64_IEEE
-    /* Conversion method      */      Teensy_Model_CM_double
-    /* Resolution (Not used)  */      0      
-    /* Accuracy (Not used)    */      0      
-    /* Lower limit            */      -1.7E+308
-    /* Upper limit            */      1.7E+308
-    ECU_ADDRESS                       0x20001700
-    /begin IF_DATA XCP
-      /begin DAQ_EVENT VARIABLE
-          /begin DEFAULT_EVENT_LIST
-            EVENT  0x0000
-          /end DEFAULT_EVENT_LIST
-      /end DAQ_EVENT
-    /end IF_DATA
-  /end MEASUREMENT 
-
-  /begin MEASUREMENT 
-    /* Name                   */      Teensy_Model_DW.MATLABSystem.speedVec
-    /* Long identifier        */      ""
-    /* Data type              */      FLOAT64_IEEE
-    /* Conversion method      */      Teensy_Model_CM_double
-    /* Resolution (Not used)  */      0      
-    /* Accuracy (Not used)    */      0      
-    /* Lower limit            */      -1.7E+308
-    /* Upper limit            */      1.7E+308
-    /* Array Size             */      
-    ARRAY_SIZE                        10
-    ECU_ADDRESS                       0x200016B0
-    /begin IF_DATA XCP
-      /begin DAQ_EVENT VARIABLE
-          /begin DEFAULT_EVENT_LIST
-            EVENT  0x0000
-          /end DEFAULT_EVENT_LIST
-      /end DAQ_EVENT
-    /end IF_DATA
-  /end MEASUREMENT 
-
-  /begin MEASUREMENT 
-    /* Name                   */      Teensy_Model_DW.MATLABSystem1.ctr
-    /* Long identifier        */      ""
-    /* Data type              */      SLONG
-    /* Conversion method      */      Teensy_Model_CM_int32
-    /* Resolution (Not used)  */      0      
-    /* Accuracy (Not used)    */      0      
-    /* Lower limit            */      -2147483648
-    /* Upper limit            */      2147483647
-    ECU_ADDRESS                       0x20001630
-    /begin IF_DATA XCP
-      /begin DAQ_EVENT VARIABLE
-          /begin DEFAULT_EVENT_LIST
-            EVENT  0x0000
-          /end DEFAULT_EVENT_LIST
-      /end DAQ_EVENT
-    /end IF_DATA
-  /end MEASUREMENT 
-
-  /begin MEASUREMENT 
-    /* Name                   */      Teensy_Model_DW.MATLABSystem1.ctrOld
-    /* Long identifier        */      ""
-    /* Data type              */      SLONG
-    /* Conversion method      */      Teensy_Model_CM_int32
-    /* Resolution (Not used)  */      0      
-    /* Accuracy (Not used)    */      0      
-    /* Lower limit            */      -2147483648
-    /* Upper limit            */      2147483647
-    ECU_ADDRESS                       0x20001634
-    /begin IF_DATA XCP
-      /begin DAQ_EVENT VARIABLE
-          /begin DEFAULT_EVENT_LIST
-            EVENT  0x0000
-          /end DEFAULT_EVENT_LIST
-      /end DAQ_EVENT
-    /end IF_DATA
-  /end MEASUREMENT 
-
-  /begin MEASUREMENT 
-    /* Name                   */      Teensy_Model_DW.MATLABSystem1.ctrWrapped
-    /* Long identifier        */      ""
-    /* Data type              */      SLONG
-    /* Conversion method      */      Teensy_Model_CM_int32
-    /* Resolution (Not used)  */      0      
-    /* Accuracy (Not used)    */      0      
-    /* Lower limit            */      -2147483648
-    /* Upper limit            */      2147483647
-    ECU_ADDRESS                       0x20001638
-    /begin IF_DATA XCP
-      /begin DAQ_EVENT VARIABLE
-          /begin DEFAULT_EVENT_LIST
-            EVENT  0x0000
-          /end DEFAULT_EVENT_LIST
-      /end DAQ_EVENT
-    /end IF_DATA
-  /end MEASUREMENT 
-
-  /begin MEASUREMENT 
-    /* Name                   */      Teensy_Model_DW.MATLABSystem1.objisempty
-    /* Long identifier        */      ""
-    /* Data type              */      UBYTE
-    /* Conversion method      */      Teensy_Model_CM_boolean
-    /* Resolution (Not used)  */      0      
-    /* Accuracy (Not used)    */      0      
-    /* Lower limit            */      0
-    /* Upper limit            */      1
-    ECU_ADDRESS                       0x2000163C
-    /begin IF_DATA XCP
-      /begin DAQ_EVENT VARIABLE
-          /begin DEFAULT_EVENT_LIST
-            EVENT  0x0000
-          /end DEFAULT_EVENT_LIST
-      /end DAQ_EVENT
-    /end IF_DATA
-  /end MEASUREMENT 
-
-  /begin MEASUREMENT 
-    /* Name                   */      Teensy_Model_DW.MATLABSystem1.resetOld
-    /* Long identifier        */      ""
-    /* Data type              */      FLOAT64_IEEE
-    /* Conversion method      */      Teensy_Model_CM_double
-    /* Resolution (Not used)  */      0      
-    /* Accuracy (Not used)    */      0      
-    /* Lower limit            */      -1.7E+308
-    /* Upper limit            */      1.7E+308
-    ECU_ADDRESS                       0x20001628
-    /begin IF_DATA XCP
-      /begin DAQ_EVENT VARIABLE
-          /begin DEFAULT_EVENT_LIST
-            EVENT  0x0000
-          /end DEFAULT_EVENT_LIST
-      /end DAQ_EVENT
-    /end IF_DATA
-  /end MEASUREMENT 
-
-  /begin MEASUREMENT 
-    /* Name                   */      Teensy_Model_DW.MATLABSystem1.speedVec
-    /* Long identifier        */      ""
-    /* Data type              */      FLOAT64_IEEE
-    /* Conversion method      */      Teensy_Model_CM_double
-    /* Resolution (Not used)  */      0      
-    /* Accuracy (Not used)    */      0      
-    /* Lower limit            */      -1.7E+308
-    /* Upper limit            */      1.7E+308
-    /* Array Size             */      
-    ARRAY_SIZE                        10
-    ECU_ADDRESS                       0x200015D8
-    /begin IF_DATA XCP
-      /begin DAQ_EVENT VARIABLE
-          /begin DEFAULT_EVENT_LIST
-            EVENT  0x0000
-          /end DEFAULT_EVENT_LIST
-      /end DAQ_EVENT
-    /end IF_DATA
-  /end MEASUREMENT 
-
-  /begin MEASUREMENT 
-    /* Name                   */      Teensy_Model_Y.Out1
-    /* Long identifier        */      ""
-    /* Data type              */      FLOAT32_IEEE
-    /* Conversion method      */      Teensy_Model_CM_single
-    /* Resolution (Not used)  */      0      
-    /* Accuracy (Not used)    */      0      
-    /* Lower limit            */      -3.4E+38
-    /* Upper limit            */      3.4E+38
-    ECU_ADDRESS                       0x20001AC4
-    /begin IF_DATA XCP
-      /begin DAQ_EVENT VARIABLE
-          /begin DEFAULT_EVENT_LIST
-            EVENT  0x0001
-          /end DEFAULT_EVENT_LIST
-      /end DAQ_EVENT
-    /end IF_DATA
-  /end MEASUREMENT 
-
-  /begin MEASUREMENT 
-    /* Name                   */      Teensy_Model_Y.Out2
-    /* Long identifier        */      ""
-    /* Data type              */      FLOAT32_IEEE
-    /* Conversion method      */      Teensy_Model_CM_single
-    /* Resolution (Not used)  */      0      
-    /* Accuracy (Not used)    */      0      
-    /* Lower limit            */      -3.4E+38
-    /* Upper limit            */      3.4E+38
-    ECU_ADDRESS                       0x20001AC8
-    /begin IF_DATA XCP
-      /begin DAQ_EVENT VARIABLE
-          /begin DEFAULT_EVENT_LIST
-            EVENT  0x0001
-          /end DEFAULT_EVENT_LIST
-      /end DAQ_EVENT
-    /end IF_DATA
-  /end MEASUREMENT 
-
-  /begin MEASUREMENT 
-    /* Name                   */      Teensy_Model_Y.Out4
-    /* Long identifier        */      ""
-    /* Data type              */      FLOAT32_IEEE
-    /* Conversion method      */      Teensy_Model_CM_single
-    /* Resolution (Not used)  */      0      
-    /* Accuracy (Not used)    */      0      
-    /* Lower limit            */      -3.4E+38
-    /* Upper limit            */      3.4E+38
-    ECU_ADDRESS                       0x20001ABC
-    /begin IF_DATA XCP
-      /begin DAQ_EVENT VARIABLE
-          /begin DEFAULT_EVENT_LIST
-            EVENT  0x0000
-          /end DEFAULT_EVENT_LIST
-      /end DAQ_EVENT
-    /end IF_DATA
-  /end MEASUREMENT 
-
-  /begin MEASUREMENT 
-    /* Name                   */      Teensy_Model_Y.Out5
-    /* Long identifier        */      ""
-    /* Data type              */      FLOAT32_IEEE
-    /* Conversion method      */      Teensy_Model_CM_single
-    /* Resolution (Not used)  */      0      
-    /* Accuracy (Not used)    */      0      
-    /* Lower limit            */      -3.4E+38
-    /* Upper limit            */      3.4E+38
-    ECU_ADDRESS                       0x20001AB8
-    /begin IF_DATA XCP
-      /begin DAQ_EVENT VARIABLE
-          /begin DEFAULT_EVENT_LIST
-            EVENT  0x0000
-          /end DEFAULT_EVENT_LIST
-      /end DAQ_EVENT
-    /end IF_DATA
-  /end MEASUREMENT 
-
-  /begin MEASUREMENT 
-    /* Name                   */      Teensy_Model_Y.Out6
-    /* Long identifier        */      ""
-    /* Data type              */      UWORD
-    /* Conversion method      */      Teensy_Model_CM_uint16
-    /* Resolution (Not used)  */      0      
-    /* Accuracy (Not used)    */      0      
-    /* Lower limit            */      0
-    /* Upper limit            */      65535
-    ECU_ADDRESS                       0x20001AC0
-    /begin IF_DATA XCP
-      /begin DAQ_EVENT VARIABLE
-          /begin DEFAULT_EVENT_LIST
-            EVENT  0x0000
-          /end DEFAULT_EVENT_LIST
-      /end DAQ_EVENT
-    /end IF_DATA
-  /end MEASUREMENT 
-
-  /begin MEASUREMENT 
-    /* Name                   */      Teensy_Model_Y.Out7
-    /* Long identifier        */      ""
-    /* Data type              */      UWORD
-    /* Conversion method      */      Teensy_Model_CM_uint16
-    /* Resolution (Not used)  */      0      
-    /* Accuracy (Not used)    */      0      
-    /* Lower limit            */      0
-    /* Upper limit            */      65535
-    ECU_ADDRESS                       0x20001AC2
-    /begin IF_DATA XCP
-      /begin DAQ_EVENT VARIABLE
-          /begin DEFAULT_EVENT_LIST
-            EVENT  0x0000
           /end DEFAULT_EVENT_LIST
       /end DAQ_EVENT
     /end IF_DATA
@@ -1469,24 +1178,6 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
     /* Long identifier        */      "Q = V"
     /* Conversion Type        */      RAT_FUNC
     /* Format                 */      "%1.0"
-    /* Units                  */      ""
-    /* Coefficients           */      COEFFS 0 1 0 0 0 1
-  /end COMPU_METHOD
-
-  /begin COMPU_METHOD
-    /* Name of CompuMethod    */      Teensy_Model_CM_double
-    /* Long identifier        */      "Q = V"
-    /* Conversion Type        */      RAT_FUNC
-    /* Format                 */      "%15.10"
-    /* Units                  */      ""
-    /* Coefficients           */      COEFFS 0 1 0 0 0 1
-  /end COMPU_METHOD
-
-  /begin COMPU_METHOD
-    /* Name of CompuMethod    */      Teensy_Model_CM_int32
-    /* Long identifier        */      "Q = V"
-    /* Conversion Type        */      RAT_FUNC
-    /* Format                 */      "%10.0"
     /* Units                  */      ""
     /* Coefficients           */      COEFFS 0 1 0 0 0 1
   /end COMPU_METHOD
@@ -1535,14 +1226,6 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
     FNC_VALUES 1 FLOAT32_IEEE COLUMN_DIR DIRECT
   /end  RECORD_LAYOUT 
 
-  /begin  RECORD_LAYOUT Record_FLOAT64_IEEE
-    FNC_VALUES 1 FLOAT64_IEEE COLUMN_DIR DIRECT
-  /end  RECORD_LAYOUT 
-
-  /begin  RECORD_LAYOUT Record_SLONG
-    FNC_VALUES 1 SLONG COLUMN_DIR DIRECT
-  /end  RECORD_LAYOUT 
-
   /begin  RECORD_LAYOUT Record_UBYTE
     FNC_VALUES 1 UBYTE COLUMN_DIR DIRECT
   /end  RECORD_LAYOUT 
@@ -1557,6 +1240,9 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
     /* Root                   */      ROOT
     /begin REF_CHARACTERISTIC
       Teensy_Model_P.Footcontrol
+      Teensy_Model_P.GPIO_0
+      Teensy_Model_P.GPIO_1
+      Teensy_Model_P.GPIO_2
       Teensy_Model_P.Gain1_Gain
       Teensy_Model_P.Gain2_Gain
       Teensy_Model_P.Gain3_Gain
@@ -1569,20 +1255,17 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
       Teensy_Model_P.Torq_Out
     /end REF_CHARACTERISTIC
     /begin REF_MEASUREMENT
+      Teensy_Model_B.GPIO_3
+      Teensy_Model_B.GPIO_4
+      Teensy_Model_B.GPIO_5
       Teensy_Model_B.MD_Current
       Teensy_Model_B.Torq_Signal
       Teensy_Model_B.actSpeed_Motor
       Teensy_Model_B.actSpeed_Torq
       Teensy_Model_B.actTemp_48
       Teensy_Model_B.actTemp_49
-      Teensy_Model_B.tempSig_raw
+      Teensy_Model_B.tempSig_raw_48
       Teensy_Model_B.tempSig_raw_49
-      Teensy_Model_Y.Out1
-      Teensy_Model_Y.Out2
-      Teensy_Model_Y.Out4
-      Teensy_Model_Y.Out5
-      Teensy_Model_Y.Out6
-      Teensy_Model_Y.Out7
     /end REF_MEASUREMENT
   /end GROUP
 

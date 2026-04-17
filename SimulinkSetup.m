@@ -4,7 +4,7 @@ load_system(mdl);
 mws = get_param(mdl, 'ModelWorkspace');
 
 ts = 1e-3;
-pwmFreq = 20e3;
+pwmFreq = 146484; % given by Laurin
 
 %% Signals
 MDCurrent = Simulink.Signal;
@@ -37,6 +37,22 @@ actTemp_49.Description = "actTemp_49";
 actTemp_49.DataType = "single";
 actTemp_49.Complexity = "real";
 
+GPIO_3 = Simulink.Signal;
+GPIO_3.Description = "GPIO_3";
+GPIO_3.DataType = "uint16";
+GPIO_3.Complexity = "real";
+
+GPIO_4 = Simulink.Signal;
+GPIO_4.Description = "GPIO_4";
+GPIO_4.DataType = "uint16";
+GPIO_4.Complexity = "real";
+
+GPIO_5 = Simulink.Signal;
+GPIO_5.Description = "GPIO_5";
+GPIO_5.DataType = "uint16";
+GPIO_5.Complexity = "real";
+
+
 % Assign to model workspace
 assignin(mws, MDCurrent.Description,        MDCurrent);
 assignin(mws, actSpeed_Motor.Description,   actSpeed_Motor);
@@ -44,23 +60,31 @@ assignin(mws, actSpeed_Torq.Description,    actSpeed_Torq);
 assignin(mws, Torq_Signal.Description,      Torq_Signal);  
 assignin(mws, actTemp_48.Description,       actTemp_48);
 assignin(mws, actTemp_49.Description,       actTemp_49);
+assignin(mws, GPIO_3.Description,           GPIO_3);
+assignin(mws, GPIO_4.Description,           GPIO_4);
+assignin(mws, GPIO_5.Description,           GPIO_5);
 
 %% Parameters
-% I2C_Adress = Simulink.Parameter;
-% I2C_Adress.Description = "I2C_Adress";
-% I2C_Adress.DataType = "uint8";
-% I2C_Adress.Value = 0x48;
-% 
-% I2C_Register = Simulink.Parameter;
-% I2C_Register.Description = "I2C_Register";
-% I2C_Register.DataType = "uint8";
-% I2C_Register.Value = 0x00; % 0x00 = temperaure register
-
 Status_LED = Simulink.Parameter;
 Status_LED.Description = "Status_LED";
 Status_LED.DataType = "boolean";
 Status_LED.Value = 0;
 % Status_LED.CoderInfo.StorageClass = "ExportedGlobal";
+
+GPIO_0 = Simulink.Parameter;
+GPIO_0.Description = "GPIO_0";
+GPIO_0.DataType = "boolean";
+GPIO_0.Value = 0;
+
+GPIO_1 = Simulink.Parameter;
+GPIO_1.Description = "GPIO_1";
+GPIO_1.DataType = "boolean";
+GPIO_1.Value = 0;
+
+GPIO_2 = Simulink.Parameter;
+GPIO_2.Description = "GPIO_2";
+GPIO_2.DataType = "boolean";
+GPIO_2.Value = 0;
 
 Torq_Out = Simulink.Parameter;
 Torq_Out.Description = "Torq_Out";
@@ -88,9 +112,10 @@ Footcontrol.DataType = "uint8";
 Footcontrol.Value = 0;
 
 % Assign to model workspace
-% assignin(mws, I2C_Adress.Description,       I2C_Adress);
-% assignin(mws, I2C_Register.Description,     I2C_Register);
 assignin(mws, Status_LED.Description,       Status_LED);
+assignin(mws, GPIO_0.Description,           GPIO_0);
+assignin(mws, GPIO_1.Description,           GPIO_1);
+assignin(mws, GPIO_2.Description,           GPIO_2);
 assignin(mws, Torq_Out.Description,         Torq_Out);
 assignin(mws, Speed_Out.Description,        Speed_Out);
 assignin(mws, Motor_Enable.Description,     Motor_Enable);
@@ -168,7 +193,8 @@ function entries = writeA2LAddresses(names, a2lFilename, pythonFilename)
     end
 
     [~, a2lBase, a2lExt] = fileparts(a2lFilename);
-    fprintf(fid, '# Addresses from A2L (%s%s)\n', a2lBase, a2lExt);
+    fprintf(fid, '# Addresses from A2L (%s%s)\n#\n', a2lBase, a2lExt);
+    fprintf(fid, '# Automatically generated: %s\n#\n', string(datetime));
 
     maxLen = 0;
     for i = 1:numel(entries)
