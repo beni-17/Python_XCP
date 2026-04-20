@@ -6,9 +6,9 @@
  *
  * Code generation for model "Teensy_Model".
  *
- * Model version              : 65
+ * Model version              : 67
  * Simulink Coder version : 25.2 (R2025b) 28-Jul-2025
- * C source code generated on : Fri Apr 17 15:52:19 2026
+ * C source code generated on : Mon Apr 20 08:45:55 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex
@@ -851,9 +851,9 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
     /* ECU Address            */      0x20000C14
     /* Record Layout          */      Record_UBYTE
     /* Maximum Difference     */      0
-    /* Conversion Method      */      Teensy_Model_CM_ufix8_En6
+    /* Conversion Method      */      Teensy_Model_CM_ufix8_En7
     /* Lower Limit            */      0
-    /* Upper Limit            */      3.984375
+    /* Upper Limit            */      1.9921875
   /end CHARACTERISTIC 
 
   /begin CHARACTERISTIC 
@@ -863,9 +863,9 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
     /* ECU Address            */      0x20000C15
     /* Record Layout          */      Record_UBYTE
     /* Maximum Difference     */      0
-    /* Conversion Method      */      Teensy_Model_CM_ufix8_En6
+    /* Conversion Method      */      Teensy_Model_CM_ufix8_En7
     /* Lower Limit            */      0
-    /* Upper Limit            */      3.984375
+    /* Upper Limit            */      1.9921875
   /end CHARACTERISTIC 
 
   /begin CHARACTERISTIC 
@@ -899,9 +899,9 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
     /* ECU Address            */      0x20000C16
     /* Record Layout          */      Record_UBYTE
     /* Maximum Difference     */      0
-    /* Conversion Method      */      Teensy_Model_CM_ufix8_En6
+    /* Conversion Method      */      Teensy_Model_CM_ufix8_En7
     /* Lower Limit            */      0
-    /* Upper Limit            */      3.984375
+    /* Upper Limit            */      1.9921875
   /end CHARACTERISTIC 
 
   /begin CHARACTERISTIC 
@@ -1192,12 +1192,12 @@ ASAP2_VERSION  1 31     /* Version 1.31 */
   /end COMPU_METHOD
 
   /begin COMPU_METHOD
-    /* Name of CompuMethod    */      Teensy_Model_CM_ufix8_En6
-    /* Long identifier        */      "Q = V*64.000000"
+    /* Name of CompuMethod    */      Teensy_Model_CM_ufix8_En7
+    /* Long identifier        */      "Q = V*128.000000"
     /* Conversion Type        */      RAT_FUNC
     /* Format                 */      "%0.6"
     /* Units                  */      ""
-    /* Coefficients           */      COEFFS 0 64.000000 0 0 0 1.000000
+    /* Coefficients           */      COEFFS 0 128.000000 0 0 0 1.000000
   /end COMPU_METHOD
 
   /begin COMPU_METHOD

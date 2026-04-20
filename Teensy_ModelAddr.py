@@ -1,6 +1,6 @@
 # Addresses from A2L (Teensy_Model.a2l)
 #
-# Automatically generated: 17-Apr-2026 15:52:45
+# Automatically generated: 20-Apr-2026 08:49:07
 #
 ADDR_FOOTCONTROL    = 0X20000C06  # UBYTE (CHARACTERISTIC)
 ADDR_GPIO_0         = 0X20000C00  # BOOLEAN (CHARACTERISTIC)
